@@ -1,3 +1,9 @@
 ﻿global using CycleMoney.Shared.Data;
 global using Microsoft.EntityFrameworkCore;
 global using Scalar.AspNetCore;
+global using CycleMoney.Shared.Models;
+global using CycleMoney.Shared.DTOs;
+global using CycleMoney.API.Services.Interfaces;
+global using CycleMoney.API.Services;
+global using Microsoft.AspNetCore.Mvc;
+global using CycleMoney.Shared.Converter;

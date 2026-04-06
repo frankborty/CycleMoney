@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CycleMoney.Shared.Models;
+﻿namespace CycleMoney.Shared.Models;
 
 public partial class Paymenttype
 {

@@ -8,6 +8,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<CycleMoneyRemoteDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SportScheduleDb")));
 
+builder.Services.AddScoped<IRecurringExpenseService, RecurringExpenseService>();
+
 var app = builder.Build();
 
 app.MapOpenApi();
