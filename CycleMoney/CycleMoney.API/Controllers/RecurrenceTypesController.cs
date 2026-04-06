@@ -2,11 +2,11 @@
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecurringExpensesController : ControllerBase
+    public class RecurrenceTypesController : ControllerBase
     {
-        private readonly IRecurringExpenseService _service;
+        private readonly IRecurrenceTypeService _service;
 
-        public RecurringExpensesController(IRecurringExpenseService service)
+        public RecurrenceTypesController(IRecurrenceTypeService service)
         {
             _service = service;
         }
@@ -30,9 +30,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(RecurringExpenseDto dto)
+        public async Task<IActionResult> CreateAsync(string name)
         {
-            var result = await _service.CreateAsync(dto);
+            var result = await _service.CreateAsync(name);
             if (!result.Success)
             {
                 return BadRequest(result.ErrorMessage);
@@ -41,9 +41,9 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, RecurringExpenseDto dto)
+        public async Task<IActionResult> UpdateAsync(int id, string name)
         {
-            var result = await _service.UpdateAsync(id, dto);
+            var result = await _service.UpdateAsync(id, name);
             if (!result.Success)
             {
                 return NotFound(result.ErrorMessage);
@@ -59,7 +59,7 @@
             {
                 return NotFound(result.ErrorMessage);
             }
-            return Ok($"Expense {id} deleted");
+            return Ok($"RecurrenceType {id} deleted");
         }
     }
 }

@@ -27,7 +27,12 @@
             }
             catch (Exception ex)
             {
-                return Result<List<RecurringExpenseDto>>.Fail(ex.Message);
+                string errorMsg = ex.Message;
+                if (ex.InnerException is not null)
+                {
+                    errorMsg += " - InnerExc: " + ex.InnerException;
+                }
+                return Result<List<RecurringExpenseDto>>.Fail(errorMsg);
             }
         }
 
@@ -55,6 +60,7 @@
         {
             try
             {
+                dto.Id = 0;
                 if (dto.Amount <= 0)
                 {
                     return Result<RecurringExpenseDto>.Fail("Amount must be greater than zero");
@@ -86,7 +92,12 @@
             }
             catch (Exception ex)
             {
-                return Result<RecurringExpenseDto>.Fail(ex.Message);
+                string errorMsg = ex.Message;
+                if(ex.InnerException is not null)
+                {
+                    errorMsg += " - InnerExc: " + ex.InnerException;
+                }
+                return Result<RecurringExpenseDto>.Fail(errorMsg);
             }
         }
 
@@ -150,13 +161,14 @@
                     Automatic = entity.Automatic
                 });
             }
-            catch (DbUpdateException)
-            {
-                return Result<RecurringExpenseDto>.Fail("Database update error");
-            }
             catch (Exception ex)
             {
-                return Result<RecurringExpenseDto>.Fail(ex.Message);
+                string errorMsg = ex.Message;
+                if (ex.InnerException is not null)
+                {
+                    errorMsg += " - InnerExc: " + ex.InnerException;
+                }
+                return Result<RecurringExpenseDto>.Fail(errorMsg);
             }
         }
 
@@ -182,7 +194,12 @@
             }
             catch (Exception ex)
             {
-                return Result<bool>.Fail($"Error deleting recurring expense: {ex.Message}");
+                string errorMsg = ex.Message;
+                if (ex.InnerException is not null)
+                {
+                    errorMsg += " - InnerExc: " + ex.InnerException;
+                }
+                return Result<bool>.Fail($"Error deleting recurring expense: {errorMsg}");
             }
         }
     }

@@ -2,24 +2,24 @@
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecurringExpensesController : ControllerBase
+    public class PaymentTypesController : ControllerBase
     {
-        private readonly IRecurringExpenseService _service;
+        private readonly IPaymentTypeService _service;
 
-        public RecurringExpensesController(IRecurringExpenseService service)
+        public PaymentTypesController(IPaymentTypeService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllA()
         {
             var result = await _service.GetAllAsync();
             return Ok(result.Data);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        [HttpGet("{id}", Name = "GetPaymentTypeById")]
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _service.GetByIdAsync(id);
             if (!result.Success)
@@ -30,9 +30,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(RecurringExpenseDto dto)
+        public async Task<IActionResult> Create(string name)
         {
-            var result = await _service.CreateAsync(dto);
+            var result = await _service.CreateAsync(name);
             if (!result.Success)
             {
                 return BadRequest(result.ErrorMessage);
@@ -41,9 +41,9 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, RecurringExpenseDto dto)
+        public async Task<IActionResult> Update(int id, string name)
         {
-            var result = await _service.UpdateAsync(id, dto);
+            var result = await _service.UpdateAsync(id, name);
             if (!result.Success)
             {
                 return NotFound(result.ErrorMessage);
@@ -52,14 +52,14 @@
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id);
             if (!result.Success)
             {
                 return NotFound(result.ErrorMessage);
             }
-            return Ok($"Expense {id} deleted");
+            return Ok($"PaymentType {id} deleted");
         }
     }
 }

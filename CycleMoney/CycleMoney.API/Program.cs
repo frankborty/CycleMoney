@@ -9,6 +9,8 @@ builder.Services.AddDbContext<CycleMoneyRemoteDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SportScheduleDb")));
 
 builder.Services.AddScoped<IRecurringExpenseService, RecurringExpenseService>();
+builder.Services.AddScoped<IRecurrenceTypeService, RecurrenceTypeService>();
+builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
 
 var app = builder.Build();
 
