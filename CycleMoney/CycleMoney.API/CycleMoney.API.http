@@ -1,0 +1,6 @@
+@CycleMoney.API_HostAddress = http://localhost:5062
+
+GET {{CycleMoney.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

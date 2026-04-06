@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CycleMoney.Shared.Models;
 using Microsoft.EntityFrameworkCore;
-using MyApp.Shared.Models;
 
-namespace MyApp.Shared.Data;
+namespace CycleMoney.Shared.Data;
 
-public partial class AppDbContext : DbContext
+public partial class CycleMoneyRemoteDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public CycleMoneyRemoteDbContext(DbContextOptions<CycleMoneyRemoteDbContext> options)
         : base(options)
     {
     }

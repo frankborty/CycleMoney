@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="MyApp.Shared/MyApp.Shared.csproj" />
+  <Project Path="CycleMoney.API/CycleMoney.API.csproj" Id="97d76160-b040-431e-9309-8baf8c1f8d0b" />
+  <Project Path="MyApp.Shared/CycleMoney.Shared.csproj" />
 </Solution>
