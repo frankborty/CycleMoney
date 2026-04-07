@@ -1,0 +1,68 @@
+﻿@using CycleMoney.FrontEnd.Models
+@using CycleMoney.Shared.DTOs
+@if (ExpenseList.Any())
+{
+    <ExpenseFiltersComponent RecurrenceTypes=@ExpenseList.Select(x=>x.RecurrenceTypeName).Distinct().ToList()
+                             PayementTypes=@ExpenseList.Select(x=>x.PaymentTypeName).Distinct().ToList() />
+
+    <MudStack Spacing="3">
+        @foreach (var expense in ExpenseList)
+        {
+            <ExpenseCard Expense="expense" />
+        }
+    </MudStack>
+}
+else
+{
+    <MudStack AlignItems="AlignItems.Center" Class="py-16">
+        <MudText Typo="Typo.h6" Color="Color.Default">Nessuna spesa trovata</MudText>
+        <MudText Typo="Typo.body2" Color="Color.Default">Prova a modificare i filtri</MudText>
+    </MudStack>
+}
+
+
+
+@code {
+    private List<RecurringExpenseDto> expenses = [];
+    private List<RecurringExpenseDto> filtered = [];
+    private ExpenseFilters filters = new();
+
+    // Opzioni dinamiche basate sui valori reali
+    private IEnumerable<string> availablePaymentTypes => 
+        expenses.Select(e => e.PaymentTypeName).Distinct().Order();
+    
+    private IEnumerable<string> availableRecurrencies => 
+        expenses.Select(e => e.RecurrenceTypeName).Distinct().Order();
+
+    private void ApplyFilters()
+    {
+        filtered = expenses
+            .Where(e => !filters.PaymentTypes.Any() || filters.PaymentTypes.Contains(e.PaymentTypeName))
+            .Where(e => !filters.Recurrencies.Any() || filters.Recurrencies.Contains(e.RecurrenceTypeName))
+            .Where(e => string.IsNullOrEmpty(filters.Search) || 
+                        (e.Description is not null && e.Description!.Contains(filters.Search, StringComparison.OrdinalIgnoreCase)))
+            .ToList();
+    }
+
+    [Parameter] public List<RecurringExpenseDto> ExpenseList { get; set; } = new List<RecurringExpenseDto>()
+    {
+        new RecurringExpenseDto{
+            Id = 1,
+            Description = "Affitto",
+            Amount = 500,
+            RecurrenceTypeName = "Mensile",
+            PaymentTypeName = "Cash",
+            Automatic = true,
+            Date = new DateOnly(2024, 6, 1)
+        },
+        new RecurringExpenseDto{
+            Id = 2,
+            Description = "Abbonamento Netflix",
+            Amount = 15.99m,
+            RecurrenceTypeName = "Bimensile",
+            PaymentTypeName = "Paypal",
+            Automatic = true,
+            Date = new DateOnly(2024, 6, 5)
+        },
+    };
+}

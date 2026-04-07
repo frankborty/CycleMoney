@@ -1,0 +1,29 @@
+﻿@using CycleMoney.FrontEnd.Models
+
+<MudStack Row Style="margin: 20px 0px 10px 0" Spacing="5">
+    <MudSelect @bind-Value="_paymentType" Label="Pagamento" FitContent Clearable>
+        @foreach (var paymentType in PayementTypes)
+        {
+            <MudSelectItem Value="paymentType">@paymentType</MudSelectItem>
+        }
+    </MudSelect>
+
+    <MudSelect @bind-Value="_recurrenceType" Label="Periodicità" FitContent Clearable>
+        @foreach (var recurrenceType in RecurrenceTypes)
+        {
+            <MudSelectItem Value="recurrenceType">@recurrenceType</MudSelectItem>
+        }
+    </MudSelect>
+
+</MudStack>
+
+@code {
+    [Parameter]
+    public List<String> PayementTypes { get; set; } = [];
+
+    [Parameter]
+    public List<String> RecurrenceTypes { get; set; } = [];
+
+    private String _paymentType = string.Empty;
+    private String _recurrenceType = string.Empty;
+}

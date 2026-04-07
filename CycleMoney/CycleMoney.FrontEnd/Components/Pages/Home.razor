@@ -1,0 +1,67 @@
+﻿@page "/"
+@using CycleMoney.FrontEnd.Components.Shared
+
+<PageTitle>CycleMoney</PageTitle>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <MudStack Class="mb-2" Spacing="1">
+
+        <!-- Riga titolo -->
+        <MudStack Row AlignItems="AlignItems.Center" Spacing="2">
+
+            <!-- Icona -->
+            <MudPaper Class="d-flex align-center justify-center" 
+                        Style="height:40px; width:40px; border-radius:12px;">
+                <MudIcon Icon="@Icons.Material.Filled.AccountBalanceWallet" Color="Color.Primary" />
+            </MudPaper>
+
+            <MudText Typo="Typo.h4" Style="font-weight:bold">
+                CycleMoney
+            </MudText>
+        </MudStack>       
+
+        <!-- Riga sotto -->
+        <MudStack Row Justify="Justify.SpaceBetween">
+
+            <!-- Descrizione -->
+            <MudText Typo="Typo.body2" Class="mt-2">
+                Gestisci le tue spese ricorrenti in un unico posto.
+            </MudText>
+
+            <!-- Bottone settings -->
+            <MudIconButton Icon="@Icons.Material.Filled.Settings"
+                            Color="Color.Default" />
+
+        </MudStack>
+
+    </MudStack>
+
+    <SummaryCard />
+
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" Class="mt-4">
+        <Header>
+            <MudButton Variant="Variant.Filled" 
+                       Color="Color.Primary" 
+                       Size="Size.Small"
+                       StartIcon="@Icons.Material.Filled.Add"
+                       Class="ml-auto">
+                Aggiungi
+            </MudButton>
+        </Header>
+
+        <ChildContent>
+            <MudTabPanel Text="Lista" Icon="@Icons.Material.Filled.GridView">
+                <ExpenseListPanel />
+            </MudTabPanel>
+
+                <MudTabPanel Text="Calendario" Icon="@Icons.Material.Filled.CalendarMonth">
+                    <MudText>Content Two</MudText>
+            </MudTabPanel>
+
+                <MudTabPanel Text="Grafici" Icon="@Icons.Material.Filled.BarChart">
+                    <MudText>Content Three</MudText>
+            </MudTabPanel>
+        </ChildContent>
+    </MudTabs>
+
+    
+</MudContainer>

@@ -1,0 +1,77 @@
+﻿@using CycleMoney.Shared.DTOs
+<MudPaper Class="pa-4 expense-card"
+          Elevation="1"
+          Style="border:1px solid rgba(0,0,0,0.1);">
+
+    <!-- HEADER -->
+    <MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.Start">
+
+        <!-- Testo -->
+        <MudStack Spacing="0" Class="flex-grow-1">
+            <MudText Typo="Typo.h6" Class="text-truncate">
+                @Expense.Description
+            </MudText>
+
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="mt-1 font-weight-bold">
+                @Expense.Amount.ToString("C")
+            </MudText>
+        </MudStack>
+
+        <!-- Azioni -->
+        <MudStack Row Spacing="1" Class="actions">
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                           Size="Size.Small"
+                           Class="text-muted" />
+
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           Size="Size.Small"
+                           Class="text-muted"/>
+        </MudStack>
+
+    </MudStack>
+
+    <!-- BADGES -->
+    <MudStack Row Spacing="1" Class="mt-3" Wrap="Wrap.Wrap">
+
+        <MudChip T="string" Variant="Variant.Filled" Size="Size.Small">
+            <MudIcon Icon="@Icons.Material.Filled.Refresh" Size="Size.Small" Class="mr-1" />
+            @Expense.RecurrenceTypeName
+        </MudChip>
+
+        @if (true)
+        {
+            <MudChip T="string" Variant="Variant.Filled" Size="Size.Small" Class="bg-success text-white">
+                <MudIcon Icon="@Icons.Material.Filled.Bolt" Size="Size.Small" Class="mr-1" />
+                @(Expense.Automatic ? "Automatico" : "Manuale")
+            </MudChip>
+        }
+
+    </MudStack>
+
+    <!-- FOOTER INFO -->
+    <MudStack Row Spacing="3" Class="mt-3 text-muted">
+
+        <MudStack Row AlignItems="AlignItems.Center" Spacing="1">
+            <MudIcon Icon="@Icons.Material.Filled.CalendarMonth" Size="Size.Small" />
+            <MudText Typo="Typo.caption">
+                Giorno: @Expense.Date.ToString("DD")
+            </MudText>
+        </MudStack>
+
+        <MudStack Row AlignItems="AlignItems.Center" Spacing="1">
+            <MudIcon Icon="@Icons.Material.Filled.CreditCard" Size="Size.Small" />
+            <MudText Typo="Typo.caption">
+                @Expense.PaymentTypeName
+            </MudText>
+        </MudStack>
+
+    </MudStack>
+
+</MudPaper>
+
+
+            
+@code {
+    [Parameter]
+    public RecurringExpenseDto Expense { get; set; } = default!;
+}

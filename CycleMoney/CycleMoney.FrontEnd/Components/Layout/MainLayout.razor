@@ -1,0 +1,100 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudLayout>
+    <MudMainContent Class="pt-16 pa-4">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@code {
+    private bool _isDarkMode = false;
+    private MudTheme? _theme = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _theme = new()
+        {
+            PaletteLight = _lightPalette,
+            PaletteDark = _darkPalette,
+            LayoutProperties = new LayoutProperties()
+        };
+    }
+
+    private void DarkModeToggle()
+    {
+        _isDarkMode = !_isDarkMode;
+    }
+
+    private readonly PaletteLight _lightPalette = new()
+    {
+        Black = "#110e2d",
+        AppbarText = "#424242",
+        AppbarBackground = "rgba(255,255,255,0.8)",
+        DrawerBackground = "#ffffff",
+        GrayLight = "#e8e8e8",
+        GrayLighter = "#f9f9f9",
+        Primary = "#2d9d7e",          // hsl(168 60% 40%)
+        PrimaryContrastText = "#ffffff",
+        Secondary = "#e8eaf0",        // hsl(220 15% 92%)
+        Background = "#f5f6f9",       // hsl(220 20% 97%)
+        Surface = "#ffffff",
+        TextPrimary = "#161b2e",      // hsl(220 25% 10%)
+        TextSecondary = "#7a8099",    // hsl(220 10% 50%)
+        ActionDefault = "#2d9d7e",
+        Error = "#d93535",            // hsl(0 72% 55%)
+        Warning = "#f0a020",          // hsl(35 90% 55%)
+        Success = "#3aad74",          // hsl(152 55% 45%)
+    };
+
+    private readonly PaletteDark _darkPalette = new()
+    {
+        BackgroundGray = "#151521",
+        AppbarText = "#92929f",
+        AppbarBackground = "rgba(26,26,39,0.8)",
+        DrawerBackground = "#1a1a27",
+        ActionDefault = "#74718e",
+        ActionDisabled = "#9999994d",
+        ActionDisabledBackground = "#605f6d4d",
+        TextDisabled = "#ffffff33",
+        DrawerIcon = "#92929f",
+        DrawerText = "#92929f",
+        GrayLight = "#2a2833",
+        GrayLighter = "#1e1e2d",
+        Info = "#4a86ff",
+        LinesDefault = "#33323e",
+        TableLines = "#33323e",
+        Divider = "#292838",
+        OverlayLight = "#1e1e2d80",
+        Primary = "#33b38a",          // hsl(168 60% 45%)
+        PrimaryContrastText = "#ffffff",
+        Secondary = "#242933",        // hsl(220 15% 18%)
+        Background = "#10131a",       // hsl(220 20% 8%)
+        Surface = "#181d28",          // hsl(220 20% 12%)
+        TextPrimary = "#e4e8f0",      // hsl(220 15% 92%)
+        TextSecondary = "#808899",    // hsl(220 10% 55%)
+        Error = "#c23333",
+        Warning = "#f0a020",
+        Success = "#3aad74",
+    };
+
+    public string DarkLightModeButtonIcon => _isDarkMode switch
+    {
+        true => Icons.Material.Rounded.AutoMode,
+        false => Icons.Material.Outlined.DarkMode,
+    };
+}
+
+

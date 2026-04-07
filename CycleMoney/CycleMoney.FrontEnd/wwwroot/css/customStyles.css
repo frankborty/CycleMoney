@@ -1,0 +1,26 @@
+﻿.expense-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: hsl(var(--primary));
+}
+
+.expense-card .actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.expense-card:hover .actions {
+    opacity: 1;
+}
+
+.text-muted {
+    color: hsl(var(--muted-foreground));
+}
+
+.expense-card {
+    border: 3px solid red;
+}
+
+.text-custom {
+    text-align: center;
+    background-color: red !important;
+}
