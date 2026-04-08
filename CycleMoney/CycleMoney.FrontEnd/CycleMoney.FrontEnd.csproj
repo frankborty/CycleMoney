@@ -16,6 +16,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\MyApp.Shared\CycleMoney.Shared.csproj" />
+    <ProjectReference Include="..\CycleMoney.Shared\CycleMoney.Shared.csproj" />
   </ItemGroup>
 </Project>

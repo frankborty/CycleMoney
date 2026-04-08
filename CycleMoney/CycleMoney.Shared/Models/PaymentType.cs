@@ -1,0 +1,10 @@
+﻿namespace CycleMoney.Shared.Models;
+
+public partial class PaymentType
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Expense> Expenses { get; set; } = new List<Expense>();
+}

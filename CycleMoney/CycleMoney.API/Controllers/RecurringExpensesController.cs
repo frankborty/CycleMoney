@@ -30,7 +30,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(RecurringExpenseDto dto)
+        public async Task<IActionResult> CreateAsync(ExpenseDto dto)
         {
             var result = await _service.CreateAsync(dto);
             if (!result.Success)
@@ -41,7 +41,7 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, RecurringExpenseDto dto)
+        public async Task<IActionResult> UpdateAsync(int id, ExpenseDto dto)
         {
             var result = await _service.UpdateAsync(id, dto);
             if (!result.Success)

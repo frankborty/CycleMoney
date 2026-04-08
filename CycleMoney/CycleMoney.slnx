@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="CycleMoney.API/CycleMoney.API.csproj" Id="97d76160-b040-431e-9309-8baf8c1f8d0b" />
   <Project Path="CycleMoney.FrontEnd/CycleMoney.FrontEnd.csproj" Id="598c29f2-6dad-4483-933e-78a72bd0f4d0" />
-  <Project Path="MyApp.Shared/CycleMoney.Shared.csproj" />
+  <Project Path="CycleMoney.Shared/CycleMoney.Shared.csproj" />
 </Solution>

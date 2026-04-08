@@ -16,7 +16,7 @@
         {
             try
             {
-                List<Paymenttype> data = await _dbContext.Paymenttypes.ToListAsync();
+                List<PaymentType> data = await _dbContext.PaymentTypes.ToListAsync();
 
                 var result = data.Select(r => PaymentTypeConverter.ToDto(r)).ToList();
                 return Result<List<PaymentTypeDto>>.Ok(result);
@@ -37,7 +37,7 @@
         // =========================
         public async Task<Result<PaymentTypeDto>> GetByIdAsync(int id)
         {
-            Paymenttype? paymentoType = await _dbContext.Paymenttypes.FindAsync(id);
+            PaymentType? paymentoType = await _dbContext.PaymentTypes.FindAsync(id);
             return paymentoType is null
                 ? Result<PaymentTypeDto>.Fail("PaymentType not found")
                 : Result<PaymentTypeDto>.Ok(PaymentTypeConverter.ToDto(paymentoType));
@@ -55,7 +55,7 @@
                     return Result<PaymentTypeDto>.Fail("PaymentType must have a name");
                 }
 
-                var paymentType = await _dbContext.Paymenttypes
+                var paymentType = await _dbContext.PaymentTypes
                     .FirstOrDefaultAsync(r => r.Name == paymentTypeName);
 
                 if (paymentType is not null)
@@ -63,11 +63,11 @@
                     return Result<PaymentTypeDto>.Fail($"A PaymentType with the same name already exists {paymentTypeName}");
                 }
 
-                Paymenttype entity = new Paymenttype
+                PaymentType entity = new PaymentType
                 {
                     Name = paymentTypeName
                 };
-                _dbContext.Paymenttypes.Add(entity);
+                _dbContext.PaymentTypes.Add(entity);
                 await _dbContext.SaveChangesAsync();
                 return Result<PaymentTypeDto>.Ok(PaymentTypeConverter.ToDto(entity));
             }
@@ -89,7 +89,7 @@
         {
             try
             {
-                var entity = await _dbContext.Paymenttypes.FindAsync(id);
+                var entity = await _dbContext.PaymentTypes.FindAsync(id);
 
                 if (entity == null)
                 {
@@ -127,14 +127,14 @@
         {
             try
             {
-                var entity = await _dbContext.Paymenttypes.FindAsync(id);
+                var entity = await _dbContext.PaymentTypes.FindAsync(id);
 
                 if (entity == null)
                 {
                     return Result<bool>.Fail("PaymentType not found");
                 }
 
-                _dbContext.Paymenttypes.Remove(entity);
+                _dbContext.PaymentTypes.Remove(entity);
                 await _dbContext.SaveChangesAsync();
 
                 return Result<bool>.Ok(true);

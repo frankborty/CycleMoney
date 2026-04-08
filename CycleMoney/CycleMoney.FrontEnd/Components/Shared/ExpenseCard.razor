@@ -11,10 +11,18 @@
             <MudText Typo="Typo.h6" Class="text-truncate">
                 @Expense.Description
             </MudText>
-
-            <MudText Typo="Typo.h5" Color="Color.Primary" Class="mt-1 font-weight-bold">
-                @Expense.Amount.ToString("C")
-            </MudText>
+            @if (Expense.FixedPrice)
+            {
+                <MudText Typo="Typo.h5" Color="Color.Primary" Class="mt-1 font-weight-bold">
+                    Costo variabile
+                </MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.h5" Color="Color.Primary" Class="mt-1 font-weight-bold">
+                    @Expense.Amount?.ToString("C")
+                </MudText>
+            }
         </MudStack>
 
         <!-- Azioni -->
@@ -54,7 +62,7 @@
         <MudStack Row AlignItems="AlignItems.Center" Spacing="1">
             <MudIcon Icon="@Icons.Material.Filled.CalendarMonth" Size="Size.Small" />
             <MudText Typo="Typo.caption">
-                Giorno: @Expense.Date.ToString("DD")
+                Giorno: @Expense.Date.ToString("dd")
             </MudText>
         </MudStack>
 
@@ -73,5 +81,5 @@
             
 @code {
     [Parameter]
-    public RecurringExpenseDto Expense { get; set; } = default!;
+    public ExpenseDto Expense { get; set; } = default!;
 }

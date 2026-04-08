@@ -16,7 +16,7 @@
         {
             try
             {
-                List<Recurrencetype> data = await _dbContext.Recurrencetypes.ToListAsync();
+                List<RecurrenceType> data = await _dbContext.RecurrenceTypes.ToListAsync();
                 var result = data.Select(r => RecurrenceTypeConverter.ToDto(r)).ToList();
                 return Result<List<RecurrenceTypeDto>>.Ok(result);
             }
@@ -36,7 +36,7 @@
         // =========================
         public async Task<Result<RecurrenceTypeDto>> GetByIdAsync(int id)
         {
-            Recurrencetype? recurrenceType = await _dbContext.Recurrencetypes.FindAsync(id);
+            RecurrenceType? recurrenceType = await _dbContext.RecurrenceTypes.FindAsync(id);
             return recurrenceType is null
                 ? Result<RecurrenceTypeDto>.Fail("RecurrenceType not found")
                 : Result<RecurrenceTypeDto>.Ok(RecurrenceTypeConverter.ToDto(recurrenceType));
@@ -54,7 +54,7 @@
                     return Result<RecurrenceTypeDto>.Fail("RecurrenceType must have a name");
                 }
 
-                var RecurrenceType = await _dbContext.Recurrencetypes
+                var RecurrenceType = await _dbContext.RecurrenceTypes
                     .FirstOrDefaultAsync(r => r.Name == RecurrenceTypeName);
 
                 if (RecurrenceType is not null)
@@ -62,11 +62,11 @@
                     return Result<RecurrenceTypeDto>.Fail($"A RecurrenceType with the same name already exists {RecurrenceTypeName}");
                 }
 
-                Recurrencetype entity = new Recurrencetype
+                RecurrenceType entity = new RecurrenceType
                 {
                     Name = RecurrenceTypeName
                 };
-                _dbContext.Recurrencetypes.Add(entity);
+                _dbContext.RecurrenceTypes.Add(entity);
                 await _dbContext.SaveChangesAsync();
                 return Result<RecurrenceTypeDto>.Ok(RecurrenceTypeConverter.ToDto(entity));
             }
@@ -88,7 +88,7 @@
         {
             try
             {
-                var entity = await _dbContext.Recurrencetypes.FindAsync(id);
+                var entity = await _dbContext.RecurrenceTypes.FindAsync(id);
 
                 if (entity == null)
                 {
@@ -126,14 +126,14 @@
         {
             try
             {
-                var entity = await _dbContext.Recurrencetypes.FindAsync(id);
+                var entity = await _dbContext.RecurrenceTypes.FindAsync(id);
 
                 if (entity == null)
                 {
                     return Result<bool>.Fail("RecurrenceType not found");
                 }
 
-                _dbContext.Recurrencetypes.Remove(entity);
+                _dbContext.RecurrenceTypes.Remove(entity);
                 await _dbContext.SaveChangesAsync();
 
                 return Result<bool>.Ok(true);

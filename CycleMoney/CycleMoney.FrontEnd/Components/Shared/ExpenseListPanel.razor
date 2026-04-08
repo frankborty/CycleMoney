@@ -23,8 +23,8 @@ else
 
 
 @code {
-    private List<RecurringExpenseDto> expenses = [];
-    private List<RecurringExpenseDto> filtered = [];
+    private List<ExpenseDto> expenses = [];
+    private List<ExpenseDto> filtered = [];
     private ExpenseFilters filters = new();
 
     // Opzioni dinamiche basate sui valori reali
@@ -44,25 +44,37 @@ else
             .ToList();
     }
 
-    [Parameter] public List<RecurringExpenseDto> ExpenseList { get; set; } = new List<RecurringExpenseDto>()
+    [Parameter] public List<ExpenseDto> ExpenseList { get; set; } = new List<ExpenseDto>()
     {
-        new RecurringExpenseDto{
+        new ExpenseDto{
             Id = 1,
             Description = "Affitto",
             Amount = 500,
             RecurrenceTypeName = "Mensile",
             PaymentTypeName = "Cash",
             Automatic = true,
-            Date = new DateOnly(2024, 6, 1)
+            Date = new DateOnly(2024, 6, 1),
+            FixedPrice = false
         },
-        new RecurringExpenseDto{
+        new ExpenseDto{
             Id = 2,
             Description = "Abbonamento Netflix",
             Amount = 15.99m,
             RecurrenceTypeName = "Bimensile",
             PaymentTypeName = "Paypal",
             Automatic = true,
-            Date = new DateOnly(2024, 6, 5)
+            Date = new DateOnly(2024, 6, 5),
+            FixedPrice = false
+        },
+        new ExpenseDto{
+            Id = 2,
+            Description = "Abbonamento Netflix",
+            Amount = null,
+            RecurrenceTypeName = "Bimensile",
+            PaymentTypeName = "Paypal",
+            Automatic = true,
+            Date = new DateOnly(2024, 6, 5),
+            FixedPrice = true
         },
     };
 }

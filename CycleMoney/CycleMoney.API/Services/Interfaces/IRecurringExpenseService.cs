@@ -2,10 +2,10 @@
 {
     public interface IRecurringExpenseService
     {
-        Task<Result<List<RecurringExpenseDto>>> GetAllAsync();
-        Task<Result<RecurringExpenseDto>> GetByIdAsync(int id);
-        Task<Result<RecurringExpenseDto>> CreateAsync(RecurringExpenseDto dto);
-        Task<Result<RecurringExpenseDto>> UpdateAsync(int id, RecurringExpenseDto dto);
+        Task<Result<List<ExpenseDto>>> GetAllAsync();
+        Task<Result<ExpenseDto>> GetByIdAsync(int id);
+        Task<Result<ExpenseDto>> CreateAsync(ExpenseDto dto);
+        Task<Result<ExpenseDto>> UpdateAsync(int id, ExpenseDto dto);
         Task<Result<bool>> DeleteAsync(int id);
     }
 }

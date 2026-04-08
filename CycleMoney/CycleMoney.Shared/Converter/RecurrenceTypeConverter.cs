@@ -1,19 +1,19 @@
 ﻿namespace CycleMoney.Shared.Converter
 {
-    public static class PaymentTypeConverter
+    public static class RecurrenceTypeConverter
     {
-        public static Paymenttype ToEntity(PaymentTypeDto dto)
+        public static RecurrenceType ToEntity(RecurrenceTypeDto dto)
         {
-            return new Paymenttype
+            return new RecurrenceType
             {
                 Id = dto.Id,
                 Name = dto.Name
             };
         }
 
-        public static PaymentTypeDto ToDto(Paymenttype entity)
+        public static RecurrenceTypeDto ToDto(RecurrenceType entity)
         {
-            return new PaymentTypeDto
+            return new RecurrenceTypeDto
             {
                 Id = entity.Id,
                 Name = entity.Name
